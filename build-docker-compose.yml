@@ -107,3 +107,17 @@ services:
       - ./chat:/usr/src
       - ./maven-repo:/root/.m2
       
+  BoundedContext38:
+    depends_on: 
+      - kafka
+    image: adoptopenjdk/maven-openjdk11:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    command: mvn spring-boot:run
+    ports:
+      - 8088:8088
+    working_dir: /usr/src
+    volumes:
+      - ./BoundedContext38:/usr/src
+      - ./maven-repo:/root/.m2
+      

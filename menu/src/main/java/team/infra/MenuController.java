@@ -22,7 +22,7 @@ public class MenuController {
 
     @RequestMapping(
         value = "/menus/{id}//menudelete",
-        method = RequestMethod.PUT,
+        method = RequestMethod.DELETE,
         produces = "application/json;charset=UTF-8"
     )
     public Menu menuDelete(
@@ -37,7 +37,7 @@ public class MenuController {
         Menu menu = optionalMenu.get();
         menu.menuDelete();
 
-        menuRepository.save(menu);
+        menuRepository.delete(menu);
         return menu;
     }
 }

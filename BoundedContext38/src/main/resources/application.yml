@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: menu
+    name: boundedcontext38
 ---
 
 spring:
@@ -29,7 +29,7 @@ spring:
                   serde: org.apache.kafka.common.serialization.Serdes$StringSerde
       bindings:
         event-in:
-          group: menu
+          group: BoundedContext38
 #<<< EDA / Topic Name
           destination: team
 #>>> EDA / Topic Name
@@ -47,7 +47,7 @@ logging:
 
 
 server:
-  port: 8084
+  port: 8088
 
 ---
 
@@ -74,7 +74,7 @@ spring:
                   serde: org.apache.kafka.common.serialization.Serdes$StringSerde
       bindings:
         event-in:
-          group: menu
+          group: BoundedContext38
           destination: team
           contentType: application/json
         event-out:

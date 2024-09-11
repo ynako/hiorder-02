@@ -17,7 +17,7 @@
 
         <v-card-text>
             <Number v-if="editMode" label="MenuId" v-model="value.menuId" :editMode="editMode" :inputUI="''"/>
-            <String label="Name" v-model="value.name" :editMode="editMode" :inputUI="''"/>
+            <String label="MenuName" v-model="value.menuName" :editMode="editMode" :inputUI="''"/>
             <String label="Description" v-model="value.description" :editMode="editMode" :inputUI="''"/>
             <Number label="Price" v-model="value.price" :editMode="editMode" :inputUI="''"/>
             <Boolean label="IsAvailable" v-model="value.isAvailable" :editMode="editMode" :inputUI="''"/>
@@ -219,13 +219,14 @@
             async menuDelete() {
                 try {
                     if(!this.offline) {
-                        var temp = await axios.put(axios.fixUrl(this.value._links['/menudelete'].href))
-                        for(var k in temp.data) {
-                            this.value[k]=temp.data[k];
-                        }
+                        await axios.delete(axios.fixUrl(this.value._links['menuDelete'].href))
                     }
 
                     this.editMode = false;
+                    this.isDelete = true;
+                    
+                    this.$emit('input', this.value);
+                    this.$emit('delete', this.value);
                 } catch(e) {
                     this.snackbar.status = true
                     if(e.response && e.response.data.message) {

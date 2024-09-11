@@ -238,6 +238,46 @@ spec:
             periodSeconds: 5
             failureThreshold: 5
 
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: BoundedContext38
+  labels:
+    app: BoundedContext38
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: BoundedContext38
+  template:
+    metadata:
+      labels:
+        app: BoundedContext38
+    spec:
+      containers:
+        - name: BoundedContext38
+          image: username/BoundedContext38:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
 
 ---
 
@@ -339,4 +379,21 @@ spec:
       targetPort: 8080
   selector:
     app: chat
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: BoundedContext38
+  labels:
+    app: BoundedContext38
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: BoundedContext38
 
