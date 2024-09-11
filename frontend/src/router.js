@@ -26,6 +26,7 @@ import ChatChatContentManager from "./components/listers/ChatChatContentCards"
 import ChatChatContentDetail from "./components/listers/ChatChatContentDetail"
 
 
+
 export default new Router({
     // mode: 'history',
     base: process.env.BASE_URL,
@@ -105,6 +106,7 @@ export default new Router({
                 name: 'ChatChatContentDetail',
                 component: ChatChatContentDetail
             },
+
 
 
 
